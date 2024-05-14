@@ -24,6 +24,9 @@ func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("User not found"))
 	}
 
+	//Asociasion de la tarea con el usuario
+	db.DB.Model(&user).Association("Tasks").Find(&user.Tasks)
+
 	json.NewEncoder(w).Encode(&user)
 }
 
