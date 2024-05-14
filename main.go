@@ -9,8 +9,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const (
+	serverPort = "3000"
+)
+
 func main() {
-	db.DBConnection()
+	db.DBConnection(serverPort)
 	//creo las tablas en la base de datos
 	db.DB.AutoMigrate(models.Task{})
 	db.DB.AutoMigrate(models.User{})
@@ -31,5 +35,5 @@ func main() {
 	r.HandleFunc("/tasks", routes.CreateTasksHandler).Methods("POST")
 	r.HandleFunc("/tasks/{id}", routes.DeleteTasksHandler).Methods("DELETE")
 
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":"+serverPort, r)
 }
