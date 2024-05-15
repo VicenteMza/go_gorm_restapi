@@ -8,6 +8,9 @@ Make sure you have the following programs installed before you begin:
 
 - [Go](https://golang.org/)
 - [Docker](https://www.docker.com/)
+
+To start the project:
+
 - [Air](https://github.com/cosmtrek/air/)
 - [Gorm](https://gorm.io/)
 
