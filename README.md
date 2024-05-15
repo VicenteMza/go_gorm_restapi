@@ -1,24 +1,24 @@
-# Guía de Configuración - Servidor Go con PostgreSQL
+# Configuration Guide - Go Server with PostgreSQL
 
-Se muestra cómo configurar un servidor Go utilizando Gorilla mux y una base de datos PostgreSQL, con instrucciones paso a paso sobre cómo configurar el entorno de desarrollo.
+This guide shows how to set up a Go server using Gorilla mux and a PostgreSQL database, whit step-by-step instruction on configuring the development enviroment.
 
-## Requisitos previos
+## Prerequisites
 
-Asegúrate de tener instalado los siguientes programas antes de comenzar:
+Make sure you have the following programs installed before you begin:
 
 - [Go](https://golang.org/)
 - [Docker](https://www.docker.com/)
 - [Air](https://github.com/cosmtrek/air/)
 - [Gorm](https://gorm.io/)
 
-## Paso 1: Configuración del servidor Go
+## Step 1: Setting up the Go server
 
-1. Instalar Gorilla Mux, una poderosa librería para enrutamiento en Go:
+1. Install Gorilla mux, a powerful routing library in Go:
 ```shell
 go get -u github.com/gorilla/mux
 ```
 
-2. Crea un servidor Go utilizando Gorilla Mux. Ejemplo:
+2. Create a Go server using Gorilla mux. Example:
 
 ```go
 package main
@@ -41,54 +41,69 @@ import (
 )
 ```
 
-3. Configurar el puerto en el que escucha el servidor en el puerto 3000
+3. Configure the port on which the server listens to port 3000.
 
-## Paso 2: Configuración de Air
-
-1. Instalar Air, una herramienta para reiniciar automáticamente el servidor cada vez que se detectan cambios en el código:
+## Step 2: Setting up Air 
+1. Install Air, a tool to automatically restart the server whenever changes are detected in the code:
 ```shell
 go install github.com/cosmtrek/air@latest
 ```
 
-2. Ejecutar Air para iniciar el servidor:
+2. Run Air to start the server:
 ```shell
 Air
 ```
 
-## Paso 3: Configurar la base de datos
+## Step 3: Configuring the database:
 
-1. Descargar una imagen de PostgreSQL mediante Docker:
+1. Download a PostgreSQL images using Docker:
 ```shell
 docker pull postgres:alpine
 ```
 
-2. Crea el contenedor de PostgreSQL:
+2. Create the PostgreSQL container:
 ```shell
 docker run -d --name postgres-container -e POSTGRES_USER=root -e POSTGRES_PASSWORD=root -p 5432:5432 postgres:alpine
 ```
 
-3. Ingresar al contenedor de PostgreSQL:
+3. Enter the PostgreSQL container:
 ```shell
 docker exec -it postgres-container bash
 ```
 
-4. Ingresar al servidor de la base de datos:
+4. Enter the database server:
 ```shell
 psql -U root --password
 ```
 
-5. Crea la base de datos:
+5. Create the database:
 ```sql
 CREATE DATABASE gorm;
 ```
 
-6. Revisa que se haya creado la base de datos:
+6. Verify that the database has been created:
 ```sql
 \l
 ```
 
-7. Para ver las tablas creadas en la base de datos, ingresa a la base de datos y ejecuta:
+7. To see the tables created in the database, enter the database and execute:
 ```sql
 \c gorm
 \dt
+```
+
+## Extra Step: 
+- Compile the project for Linux:
+```bash
+GOOS=linux GOARCH=amd64 go build -o my_program_linux main.go
+```
+
+- Compile the project for macOS:
+```bash
+GOOS=darwin GOARCH=amd64 go build -o my_program_macos main.go
+```
+
+- Compile the project for Windows:
+```bash
+GOOS=windows GOARCH=amd64 go build -o my_program_win.exe main.go
 ```
